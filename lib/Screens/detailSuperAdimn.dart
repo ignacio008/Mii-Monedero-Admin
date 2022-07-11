@@ -399,7 +399,7 @@ bool mensaje=false;
                       ),
                     ),
                     Text(
-                      "Cuntos Scaneos realizo: ${scaneoList.length} ",
+                      "Scaneos realizados: ${scaneoList.length} ",
                       style: TextStyle(
                          fontWeight: FontWeight.w600,
                           fontSize: 14.0
@@ -413,13 +413,13 @@ bool mensaje=false;
                       ),
                     ),
                     Text(
-                      "Cuantas ventas hizo :  ${ventasScaneadas.length}",
+                      "Ventas realizadas :  ${ventasScaneadas.length}",
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      "Cuanto ingreso: \$${ventasScaneadas.length*statecosto.costoPorPasaje} MXN",
+                      "Ingreso: \$${ventasScaneadas.length*statecosto.costoPorPasaje} MXN",
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14.0
