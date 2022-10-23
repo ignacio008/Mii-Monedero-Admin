@@ -170,6 +170,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Text(
                   "Administador",
+                  
                   style: TextStyle(
                       fontSize: 20.0,
                       color: Colors.white,
