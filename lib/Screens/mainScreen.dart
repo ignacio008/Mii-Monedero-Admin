@@ -415,7 +415,7 @@ class _MainScreenState extends State<MainScreen> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.19,
+                                              0.17,
                                           width: widget.adminModel.typeAdmin !=
                                                   "superAdmin"
                                               ? MediaQuery.of(context)
