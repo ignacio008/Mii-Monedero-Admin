@@ -468,7 +468,7 @@ class _UsersScreenState extends State<UsersScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -535,7 +535,7 @@ class _UsersScreenState extends State<UsersScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(

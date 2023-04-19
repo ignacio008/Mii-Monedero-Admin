@@ -120,7 +120,7 @@ class _DialogResetContrasenaState extends State<DialogResetContrasena> {
     return Container(
       height: 42.0,
       width: 220.0,
-      child: RaisedButton(
+      child: MaterialButton(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
             side: BorderSide(color: Colors.black, width: 2.0)),

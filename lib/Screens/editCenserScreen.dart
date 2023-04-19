@@ -912,7 +912,7 @@ class _EditCenserScreenState extends State<EditCenserScreen> {
           }
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -984,7 +984,7 @@ class _EditCenserScreenState extends State<EditCenserScreen> {
           }
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -1047,7 +1047,7 @@ class _EditCenserScreenState extends State<EditCenserScreen> {
           }
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -1339,7 +1339,7 @@ class _EditCenserScreenState extends State<EditCenserScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -1353,7 +1353,7 @@ class _EditCenserScreenState extends State<EditCenserScreen> {
             Navigator.of(context).pop();
           },
         ),
-        FlatButton(
+        TextButton(
           child: Text(
             "Aceptar",
             style: TextStyle(

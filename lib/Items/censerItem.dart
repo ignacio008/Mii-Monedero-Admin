@@ -201,7 +201,7 @@ String generateRandomString(int len) {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -215,7 +215,7 @@ String generateRandomString(int len) {
             Navigator.of(context).pop();
           },
         ),
-        FlatButton(
+        TextButton(
           child: Text(
             "Aceptar",
             style: TextStyle(
@@ -262,7 +262,7 @@ String generateRandomString(int len) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             FlatButton(onPressed: (){
+             MaterialButton(onPressed: (){
                print("La lista antes de ${stateCosto.length}");
     if(stateCosto.isEmpty){
       
@@ -292,7 +292,7 @@ String generateRandomString(int len) {
             SizedBox(
                 height:15,
               ),
-            FlatButton(onPressed: () {
+            MaterialButton(onPressed: () {
             if( widget.censerModel.suspended==true){
             QuerysService().UpdateSuspendedTrueCenser(idCenser: widget.censerModel.id);
             setState(() {
@@ -318,7 +318,7 @@ String generateRandomString(int len) {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        MaterialButton(
           child: Text(
             "Cancelar",
             style: TextStyle(

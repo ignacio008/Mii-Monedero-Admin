@@ -132,7 +132,7 @@ class _SalesItemState extends State<SalesItem> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        MaterialButton(
           child: Text(
             "Cancelar",
             style: TextStyle(

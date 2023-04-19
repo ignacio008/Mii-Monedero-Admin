@@ -948,7 +948,7 @@ class _AddCenserScreenState extends State<AddCenserScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -1024,7 +1024,7 @@ class _AddCenserScreenState extends State<AddCenserScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -1091,7 +1091,7 @@ class _AddCenserScreenState extends State<AddCenserScreen> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(

@@ -18,13 +18,14 @@ import 'package:monedero_admin/MyColors/Colors.dart' as MyColors;
 
 class CensersScreen extends StatefulWidget {
   AdminModel adminmodel;
-  CensersScreen( this.adminmodel,);
+  CensersScreen(
+    this.adminmodel,
+  );
   @override
   _CensersScreenState createState() => _CensersScreenState();
 }
 
 class _CensersScreenState extends State<CensersScreen> {
-
   bool _showSpinner = true;
   List<CenserModel> censers = [];
   List<StateModel> stateList = [];
@@ -33,20 +34,21 @@ class _CensersScreenState extends State<CensersScreen> {
   TextEditingController _controllerEmail;
   String _state = "Agregar estado";
   String _locality = "Agregar municipio";
-  
-  
 
   Future<String> _loadASmaeAsset() async {
     return await rootBundle.loadString('assets/estados.json');
   }
+
   loadStates() async {
     String jsonString = await _loadASmaeAsset();
     var jsonResponse = json.decode(jsonString) as List;
     stateList = jsonResponse.map((i) => StateModel.fromJson(i)).toList();
   }
+
   Future<String> _loadLocalitiesAsset() async {
     return await rootBundle.loadString('assets/result.json');
   }
+
   loadLocalities() async {
     String jsonString = await _loadLocalitiesAsset();
     var jsonResponse = json.decode(jsonString) as List;
@@ -60,55 +62,57 @@ class _CensersScreenState extends State<CensersScreen> {
     setSpinnerStatus(true);
     final messages = await QuerysService().getCensersByEmail(email: email);
     censers = _getCenserItem(messages.docs);
-    if(censers.length > 0){
+    if (censers.length > 0) {
       setSpinnerStatus(false);
-    }
-    else{
+    } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context, duration: Toast.LENGTH_LONG);
+      Toast.show("No se han encontrado censers", context,
+          duration: Toast.LENGTH_LONG);
     }
   }
+
   void _getCensersByState({String state}) async {
     setSpinnerStatus(true);
     final messages = await QuerysService().getCensersByState(state: state);
     censers = _getCenserItem(messages.docs);
-    if(censers.length > 0){
+    if (censers.length > 0) {
       setSpinnerStatus(false);
-    }
-    else{
+    } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context, duration: Toast.LENGTH_LONG);
+      Toast.show("No se han encontrado censers", context,
+          duration: Toast.LENGTH_LONG);
     }
   }
+
   void _getCensersByStateAndCity({String state, String city}) async {
     setSpinnerStatus(true);
-    final messages = await QuerysService().getCensersByStateAndCity(state: state, city: city);
+    final messages = await QuerysService()
+        .getCensersByStateAndCity(state: state, city: city);
     censers = _getCenserItem(messages.docs);
-    if(censers.length > 0){
+    if (censers.length > 0) {
       setSpinnerStatus(false);
-    }
-    else{
+    } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context, duration: Toast.LENGTH_LONG);
+      Toast.show("No se han encontrado censers", context,
+          duration: Toast.LENGTH_LONG);
     }
   }
 
   void _getCensers() async {
     final messages = await QuerysService().getAllCensers();
     censers = _getCenserItem(messages.docs);
-    if(censers.length > 0){
-      
+    if (censers.length > 0) {
       setSpinnerStatus(false);
-    }
-    else{
+    } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context, duration: Toast.LENGTH_LONG);
+      Toast.show("No se han encontrado censers", context,
+          duration: Toast.LENGTH_LONG);
     }
   }
 
-  List<CenserModel> _getCenserItem(dynamic miInfo){
+  List<CenserModel> _getCenserItem(dynamic miInfo) {
     List<CenserModel> miInfoList = [];
-    for(var datos in miInfo) {
+    for (var datos in miInfo) {
       final id_ = datos.data()['id'];
       final name_ = datos.data()['name'] ?? '';
       final email_ = datos.data()['email'] ?? '';
@@ -127,15 +131,15 @@ class _CensersScreenState extends State<CensersScreen> {
       final photos_ = datos.data()['photos'];
       final services_ = datos.data()['services'];
       final distanceTo_ = datos.data()['distanceTo'] ?? '';
-       final numUnidad_ =datos.data()['numUnidad']??'';
-      final placa_ = datos.data()['placa']??'';
-      final photoPLaca_ = datos.data()['photoPLaca']??'';
-      final photoLicencia_ = datos.data()['photoLicencia']??'';
-      final nameRuta_ = datos.data()['nameRuta']??'';
-      final paraderoRuta_ = datos.data()['paraderoRuta']??'';
-      final photoCamion_ =datos.data()['camion']?? null;
-      final activacionesRestantes_ = datos.data()['activacionesRestantes'] ?? '';
-
+      final numUnidad_ = datos.data()['numUnidad'] ?? '';
+      final placa_ = datos.data()['placa'] ?? '';
+      final photoPLaca_ = datos.data()['photoPLaca'] ?? '';
+      final photoLicencia_ = datos.data()['photoLicencia'] ?? '';
+      final nameRuta_ = datos.data()['nameRuta'] ?? '';
+      final paraderoRuta_ = datos.data()['paraderoRuta'] ?? '';
+      final photoCamion_ = datos.data()['camion'] ?? null;
+      final activacionesRestantes_ =
+          datos.data()['activacionesRestantes'] ?? '';
 
       CenserModel censerModel = CenserModel(
         id: id_,
@@ -153,38 +157,35 @@ class _CensersScreenState extends State<CensersScreen> {
         longitude: longitude_,
         nameOwner: nameOwner_,
         numberOwner: numberOwner_,
-        photos: photos_  ,
-        services: services_  ,
+        photos: photos_,
+        services: services_,
         distanceTo: distanceTo_,
-        numUnidad:numUnidad_,
-        placa:placa_,
-        photoPLaca:photoPLaca_,
-        photoLicencia:photoLicencia_,
-        nameRuta:nameRuta_,
-        paraderoRuta:paraderoRuta_,
-        photoCamion:photoCamion_,
-        activacionesRestantes:activacionesRestantes_,
+        numUnidad: numUnidad_,
+        placa: placa_,
+        photoPLaca: photoPLaca_,
+        photoLicencia: photoLicencia_,
+        nameRuta: nameRuta_,
+        paraderoRuta: paraderoRuta_,
+        photoCamion: photoCamion_,
+        activacionesRestantes: activacionesRestantes_,
       );
       miInfoList.add(censerModel);
     }
     return miInfoList;
   }
 
-  void setSpinnerStatus(bool status){
+  void setSpinnerStatus(bool status) {
     setState(() {
       _showSpinner = status;
     });
   }
-  
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    
     _getCensers();
     _controllerEmail = TextEditingController();
-    
   }
 
   @override
@@ -194,14 +195,11 @@ class _CensersScreenState extends State<CensersScreen> {
     _controllerEmail.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "CHOFERES "
-        ),
+        title: Text("CHOFERES "),
       ),
       body: ModalProgressHUD(
         inAsyncCall: _showSpinner,
@@ -212,10 +210,7 @@ class _CensersScreenState extends State<CensersScreen> {
             ),
             Text(
               "Mii Monedero Admin",
-              style: TextStyle(
-                  fontSize: 26.0,
-                  fontWeight: FontWeight.bold
-              ),
+              style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -327,14 +322,11 @@ class _CensersScreenState extends State<CensersScreen> {
             //   ],
             // ),
             SizedBox(
-              height:15.0,
+              height: 15.0,
             ),
             Text(
               "Buscar por correo electrónico",
-              style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold
-              ),
+              style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             Row(
@@ -356,19 +348,18 @@ class _CensersScreenState extends State<CensersScreen> {
                           hintStyle: TextStyle(
                             fontFamily: 'Futura',
                             //color: ColoresApp.Colores.colorGrisClaro
-                          )
-                      ),
+                          )),
                     ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
-                    if(_controllerEmail.text.contains("@")){
+                    if (_controllerEmail.text.contains("@")) {
                       _getCensersByEmail(email: _controllerEmail.text.trim());
-                    }
-                    else{
-                      Toast.show("Introduce un correo válido", context, duration: Toast.LENGTH_LONG);
+                    } else {
+                      Toast.show("Introduce un correo válido", context,
+                          duration: Toast.LENGTH_LONG);
                     }
                   },
                   child: Container(
@@ -378,9 +369,7 @@ class _CensersScreenState extends State<CensersScreen> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Icon(
-                          Icons.search
-                      ),
+                      child: Icon(Icons.search),
                     ),
                   ),
                 ),
@@ -390,8 +379,6 @@ class _CensersScreenState extends State<CensersScreen> {
               ],
             ),
             _censersList()
-
-            
           ],
         ),
       ),
@@ -412,9 +399,8 @@ class _CensersScreenState extends State<CensersScreen> {
     );
   }
 
-  Widget _censersList(){
-
-    if(censers.length > 0){
+  Widget _censersList() {
+    if (censers.length > 0) {
       return MediaQuery.removePadding(
         context: context,
         removeTop: true,
@@ -422,23 +408,25 @@ class _CensersScreenState extends State<CensersScreen> {
           child: ListView.builder(
               itemCount: censers.length,
               itemBuilder: (BuildContext ctxt, int index) {
-                return CenserItem(censerModel: censers[index], function: _reloadData,adminmodel: widget.adminmodel,);
-              }
-          ),
+                return CenserItem(
+                  censerModel: censers[index],
+                  function: _reloadData,
+                  adminmodel: widget.adminmodel,
+                );
+              }),
         ),
       );
-    }
-    else{
+    } else {
       return Container();
     }
   }
 
-  _reloadData(){
+  _reloadData() {
     censers.clear();
     _getCensers();
   }
 
-  void _showStatesDialog(){
+  void _showStatesDialog() {
     AlertDialog alertDialog = AlertDialog(
       title: Text(
         "ESTADOS",
@@ -448,22 +436,22 @@ class _CensersScreenState extends State<CensersScreen> {
         ),
       ),
       content: Container(
-        width:MediaQuery.of(context).size.width*0.9,
-        height:MediaQuery.of(context).size.height*0.8,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.8,
         child: ListView.builder(
             itemCount: stateList.length,
             itemBuilder: (BuildContext ctxt, int index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       _state = stateList[index].nombre;
                       _locality = "Agregar municipio";
 
                       localityListFiltered.clear();
-                      for(int i = 0; i < localityList.length; i++){
-                        if(localityList[i].nombre_estado == _state){
+                      for (int i = 0; i < localityList.length; i++) {
+                        if (localityList[i].nombre_estado == _state) {
                           localityListFiltered.add(localityList[i]);
                         }
                       }
@@ -474,9 +462,7 @@ class _CensersScreenState extends State<CensersScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(
-                          stateList[index].nombre
-                      ),
+                      Text(stateList[index].nombre),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -488,11 +474,10 @@ class _CensersScreenState extends State<CensersScreen> {
                   ),
                 ),
               );
-            }
-        ),
+            }),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -509,12 +494,14 @@ class _CensersScreenState extends State<CensersScreen> {
       ],
     );
 
-    showDialog(context: context, builder: (BuildContext context){
-      return alertDialog;
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 
-  void _showLocalitiesDialog(){
+  void _showLocalitiesDialog() {
     AlertDialog alertDialog = AlertDialog(
       title: Text(
         "MUNICIPIOS",
@@ -524,15 +511,15 @@ class _CensersScreenState extends State<CensersScreen> {
         ),
       ),
       content: Container(
-         width:MediaQuery.of(context).size.width*0.9,
-        height:MediaQuery.of(context).size.height*0.8,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.8,
         child: ListView.builder(
             itemCount: localityListFiltered.length,
             itemBuilder: (BuildContext ctxt, int index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       _locality = localityListFiltered[index].nombre_municipio;
                       Navigator.of(context).pop();
@@ -541,9 +528,7 @@ class _CensersScreenState extends State<CensersScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(
-                          localityListFiltered[index].nombre_municipio
-                      ),
+                      Text(localityListFiltered[index].nombre_municipio),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -555,11 +540,10 @@ class _CensersScreenState extends State<CensersScreen> {
                   ),
                 ),
               );
-            }
-        ),
+            }),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
@@ -576,8 +560,10 @@ class _CensersScreenState extends State<CensersScreen> {
       ],
     );
 
-    showDialog(context: context, builder: (BuildContext context){
-      return alertDialog;
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 }

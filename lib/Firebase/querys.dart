@@ -46,6 +46,9 @@ class QuerysService{
   Future<QuerySnapshot> getAllCensers() async{
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_CENSERS).orderBy("createdOn", descending: true).limit(20).get();
   }
+  Future<QuerySnapshot> getAllCamiones() async{
+    return await _fireStore.collection(FirebaseReferencias.REFERENCE_CAMIONES).orderBy("createdOn", descending: true).limit(20).get();
+  }
   Future<QuerySnapshot> getAllCensersTAQUILLA() async{
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_ADMIN).where('type', isEqualTo: "taquilla").orderBy("createdOn", descending: true).limit(20).get();
   }
@@ -53,6 +56,12 @@ class QuerysService{
   Future<QuerySnapshot> getCensersByEmail({String email}) async{
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_CENSERS).where('email', isEqualTo: email).get();
   }
+
+   Future<QuerySnapshot> getCensersNameRuta({String nameRuta}) async{
+    return await _fireStore.collection(FirebaseReferencias.REFERENCE_CAMIONES).where('nameRuta', isEqualTo: nameRuta).get();
+  }
+
+
   Future<QuerySnapshot> getCensersByEmailTaquilla({String email}) async{
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_ADMIN).where('email', isEqualTo: email).get();
   }
@@ -121,6 +130,22 @@ class QuerysService{
     bool error = false;
 
     await _fireStore.collection(FirebaseReferencias.REFERENCE_CENSERS).doc(idCenser).set(collectionValues).catchError((onError){
+      Toast.show("Ha ocurrido un error, por favor, intente de nuevo", context, duration: Toast.LENGTH_LONG);
+      error = true;
+    }).then((onValue){
+      if(!error){
+        Toast.show("¡Información subida exitosamente!", context, duration: Toast.LENGTH_LONG);
+        function();
+      }
+      else{
+        errorFunction();
+      }
+    });
+  }
+   void SaveCamiones({String idCenser,BuildContext context, Function function, Function errorFunction, Map<String, dynamic> collectionValues}) async {
+    bool error = false;
+
+    await _fireStore.collection(FirebaseReferencias.REFERENCE_CAMIONES).doc(idCenser).set(collectionValues).catchError((onError){
       Toast.show("Ha ocurrido un error, por favor, intente de nuevo", context, duration: Toast.LENGTH_LONG);
       error = true;
     }).then((onValue){

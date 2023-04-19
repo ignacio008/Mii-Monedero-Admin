@@ -23,7 +23,7 @@ class AppTextField extends StatelessWidget{
         color: Colors.white70,
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
         child: TextFormField(
-          autovalidate: autoValidate,
+         autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           focusNode: focusNode,
           controller: controller,

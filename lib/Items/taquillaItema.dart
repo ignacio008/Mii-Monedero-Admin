@@ -186,7 +186,7 @@ class _TaquillItemState extends State<TaquillItem> {
                         ),
                       ),
                    SizedBox(height: 15.0),
-             FlatButton(onPressed: (){
+             MaterialButton(onPressed: (){
               String _Saldo = _saldoController.text.trim();
               bool SaldoValido = RegExp(r'^\d{2,10}$').hasMatch(_Saldo);
 
@@ -259,7 +259,7 @@ class _TaquillItemState extends State<TaquillItem> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        MaterialButton(
           child: Text(
             "Cancelar",
             style: TextStyle(
