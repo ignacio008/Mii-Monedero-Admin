@@ -110,14 +110,16 @@ class _CenserItemState extends State<CenserItem> {
           //     builder: (context) => EditCenserScreen (censerModel: widget.censerModel, function: widget.function))
           // );
 
-          widget.adminmodel.typeAdmin != "superAdmin"
-              ? _showAlertoption(context)
-              : Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DetailSuperAdmin(
-                          adminModel: widget.adminmodel,
-                          censerModel: widget.censerModel)));
+          // widget.adminmodel.typeAdmin != "superAdmin"
+              widget.adminmodel.isSupended==false?
+               _showAlertoption(context):
+              _showAlertIsSusspend(context);
+              // : Navigator.pushReplacement(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => DetailSuperAdmin(
+              //             adminModel: widget.adminmodel,
+              //             censerModel: widget.censerModel)));
         },
         child: Container(
           child: Row(
@@ -252,30 +254,41 @@ class _CenserItemState extends State<CenserItem> {
         ),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * 0.22,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.28,
+          minHeight: MediaQuery.of(context).size.height * 0.18),
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             MaterialButton(
               onPressed: () {
-                print("La lista antes de ${stateCosto.length}");
-                if (stateCosto.isEmpty) {
-                  StateCosto cuadro1 = StateCosto(
-                      state: "E.U",
-                      locality: "E.U",
-                      costo: 1000,
-                      costoPorPasaje: 55);
-                  stateCosto.add(cuadro1);
-                }
-                print("La lista despues de ${stateCosto.length}");
-                _activaciones(context, widget.censerModel.id, stateCosto[0]);
+                // AGREGAR ACTIVACIONES
+                // print("La lista antes de ${stateCosto.length}");
+                // if (stateCosto.isEmpty) {
+                //   StateCosto cuadro1 = StateCosto(
+                //       state: "E.U",
+                //       locality: "E.U",
+                //       costo: 1000,
+                //       costoPorPasaje: 55);
+                //   stateCosto.add(cuadro1);
+                // }
+                // print("La lista despues de ${stateCosto.length}");
+                // _activaciones(context, widget.censerModel.id, stateCosto[0]);
+
+                // VER DETALLE
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailSuperAdmin(
+                          adminModel: widget.adminmodel,
+                          censerModel: widget.censerModel)));
               },
               padding:
-                  EdgeInsets.only(left: 40, top: 17, right: 40, bottom: 17),
-              child: Text("Recargar +12 activaciones"),
+                  EdgeInsets.only(left: 30, top: 17, right: 30, bottom: 17),
+              child: Text("Datos Generales de Chofer"),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(15),
                 side: BorderSide(color: Colors.blue, width: 2.0),
               ),
             ),
@@ -293,6 +306,10 @@ class _CenserItemState extends State<CenserItem> {
               height: 15,
             ),
             MaterialButton(
+             color: widget.censerModel.suspended==true?
+             Color.fromARGB(255, 74, 202, 78)
+             :Color.fromARGB(255, 203, 50, 39),
+             textColor: Colors.white,
               onPressed: () {
                 if (widget.censerModel.suspended == true) {
                   QuerysService().UpdateSuspendedTrueCenser(
@@ -310,13 +327,13 @@ class _CenserItemState extends State<CenserItem> {
                 Navigator.of(context).pop();
               },
               padding:
-                  EdgeInsets.only(left: 75, top: 17, right: 75, bottom: 17),
+                  EdgeInsets.only(left: 70, top: 17, right: 70, bottom: 17),
               child: Text(
                 "${widget.censerModel.suspended == false ? "Suspender" : "Activar"}",
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(color: Colors.blue, width: 2.0),
+                borderRadius: BorderRadius.circular(15),
+                // side: BorderSide(color: Colors.blue, width: 2.0),
               ),
             ),
           ],
@@ -475,5 +492,86 @@ class _CenserItemState extends State<CenserItem> {
       // );
 
     }
+
+
+
+
+
+    void _showAlertIsSusspend(BuildContext context) {
+    AlertDialog alertDialog = AlertDialog(
+      
+      title: Text(
+        "Lo sentimos Taquilla Suspendida",
+        style: TextStyle(
+          fontFamily: 'Barlow',
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      content: Container(
+        height: 175,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+           Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: 
+                  Image.network("https://cdn.pixabay.com/animation/2023/04/28/18/34/18-34-10-554_512.gif",height: 90,
+                              width: 90,
+  loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+  if (loadingProgress == null) return child;
+    return Center(
+      child: CircularProgressIndicator(
+        color: Colors.red,
+      value: loadingProgress.expectedTotalBytes != null ? 
+             loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+             : null,
+      ),
+    );
+  },
+),
+                  
+                ),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12))),
+              ),
+              Text(
+                "Si tiene alguna duda puede comunicarse en Whatsapp 7331274925", 
+              textAlign: TextAlign.center,
+              )
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        MaterialButton(
+          child: Text(
+            "Cancelar",
+            style: TextStyle(
+              fontSize: 16.0,
+              color: MyColors.Colors.colorBackgroundDark,
+              fontFamily: 'Barlow',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
+  }
+
   }
 

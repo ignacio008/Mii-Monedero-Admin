@@ -93,7 +93,7 @@ class _ScreenCamionesState extends State<ScreenCamiones> {
               height: 10.0,
             ),
             Text(
-              "Mii Monedero Admin",
+              "Mii Monedero Cuentas",
               style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -201,6 +201,7 @@ List<CamionesModel> _getCamionesItem(dynamic miInfo) {
     final updateOn_ = datos.data()['updateOn'] ?? null;
     final state_ = datos.data()['state'] ?? '';
     final locality_ = datos.data()['locality'] ?? '';
+    final numEconomico_ = datos.data()['numEconomico'] ?? '';
 
     CamionesModel camionesModel = CamionesModel(
       idCamion: idCamion_,
@@ -209,6 +210,7 @@ List<CamionesModel> _getCamionesItem(dynamic miInfo) {
       locality: locality_,
       state: state_,
       createBy: createBy_,
+      numEconomico:numEconomico_,
     );
     miInfoList.add(camionesModel);
   }

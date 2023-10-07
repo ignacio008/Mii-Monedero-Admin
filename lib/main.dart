@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mii Monedero admin',
+      title: 'Mii Monedero Cuentas',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),

@@ -204,7 +204,7 @@ class _UsersScreenState extends State<UsersScreen> {
               height: 10.0,
             ),
             Text(
-              "Mii Monedero Admin",
+              "Mii Monedero Cuentas",
               style: TextStyle(
                   fontSize: 26.0,
                   fontWeight: FontWeight.bold

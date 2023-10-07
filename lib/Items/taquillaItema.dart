@@ -140,7 +140,7 @@ class _TaquillItemState extends State<TaquillItem> {
         ),
       ),
       content: Container(
-        height:MediaQuery.of(context).size.height*0.17,
+        height:MediaQuery.of(context).size.height*0.32,
         width:MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -186,7 +186,10 @@ class _TaquillItemState extends State<TaquillItem> {
                         ),
                       ),
                    SizedBox(height: 15.0),
-             MaterialButton(onPressed: (){
+             MaterialButton(
+              color: Color.fromARGB(255, 74, 202, 78),
+              textColor:Colors.white,
+              onPressed: (){
               String _Saldo = _saldoController.text.trim();
               bool SaldoValido = RegExp(r'^\d{2,10}$').hasMatch(_Saldo);
 
@@ -213,48 +216,53 @@ class _TaquillItemState extends State<TaquillItem> {
        
             
           },
-             padding: EdgeInsets.only(left:50,top:17, right:50, bottom:17),
+             padding: EdgeInsets.only(left:60,top:17, right:60, bottom:17),
               child: Text("Agregar Saldo"),  
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(color:Colors.blue, width:2.0),
+                borderRadius: BorderRadius.circular(15),
+                // side: BorderSide(color:Colors.blue, width:2.0),
               ),
               ),
               SizedBox(
                 height:15,
               ),
-          //   Text(
-          //     "¿Está seguro de querer ${widget.taquillassModel.isSupended==false?"Suspender esta Taquilla?":"Activar esta Taquilla? "}",
-          //     style: TextStyle(
-          //       fontFamily: 'Barlow',
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   ),
-          //   SizedBox(
-          //       height:15,
-          //     ),
-          //   FlatButton(onPressed: (){
-          //   if( widget.taquillassModel.isSupended==true){
-          //   QuerysService().UpdateSuspendedTrueCenserTaquilla(idCenser: widget.taquillassModel.id);
-          //   setState(() {
-          //     widget.taquillassModel.isSupended = false;
-          //   });
-          //   }else{
-          //       QuerysService().UpdateSuspendedFalseCamionTaquilla(idCenser: widget.taquillassModel.id);
-          //   setState(() {
-          //     widget.taquillassModel.isSupended = true;
-          //   });
-          //   }
-          //   Navigator.of(context).pop();
-          // },
-          //    padding: EdgeInsets.only(left:75,top:17, right:75, bottom:17),
-          //     child: Text("${widget.taquillassModel.isSupended==false?"Suspender":"Activar"}",),
+             Text(
+               "¿Está seguro de querer ${widget.taquillassModel.isSupended==false?"Suspender esta Taquilla?":"Activar esta Taquilla? "}",
+               style: TextStyle(
+                 fontFamily: 'Barlow',
+                 fontWeight: FontWeight.w500,
+               ),
+             ),
+             SizedBox(
+                 height:15,
+               ),
+             MaterialButton(
+              color: widget.taquillassModel.isSupended==false
+              ?Color.fromARGB(255, 203, 50, 39)
+              :Color.fromARGB(255, 74, 202, 78),
+              textColor: Colors.white,
+              onPressed: (){
+             if( widget.taquillassModel.isSupended==true){
+             QuerysService().UpdateSuspendedTrueCenserTaquilla(idCenser: widget.taquillassModel.id);
+             setState(() {
+               widget.taquillassModel.isSupended = false;
+             });
+             }else{
+                 QuerysService().UpdateSuspendedFalseCamionTaquilla(idCenser: widget.taquillassModel.id);
+             setState(() {
+               widget.taquillassModel.isSupended = true;
+             });
+             }
+             Navigator.of(context).pop();
+           },
+              padding: EdgeInsets.only(left:75,top:17, right:75, bottom:17),
+               child: Text("${widget.taquillassModel.isSupended==false?"Suspender":"Activar"}",),
               
-          //     shape: RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.circular(20),
-          //       side: BorderSide(color:Colors.blue, width:2.0),
-          //     ),
-          //     ),
+               shape: RoundedRectangleBorder(
+                 borderRadius: BorderRadius.circular(15),
+                //  side: BorderSide(color:Colors.blue, width:2.0),
+               ),
+               ),
           ],
         ),
       ),

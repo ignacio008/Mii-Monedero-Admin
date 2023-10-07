@@ -17,7 +17,7 @@ import '../Models/stateModel.dart';
 class AddCamiones extends StatefulWidget {
   AdminModel adminModel;
   Function function;
-  AddCamiones(this.adminModel,this.function);
+  AddCamiones(this.adminModel, this.function);
 
   @override
   State<AddCamiones> createState() => _AddCamionesState();
@@ -26,6 +26,7 @@ class AddCamiones extends StatefulWidget {
 class _AddCamionesState extends State<AddCamiones> {
   double screenHeight;
   TextEditingController _nameController;
+  TextEditingController _numEconomicoController;
   String _state = "Estado";
   String _locality = "Municipio";
   bool _showSpinner = false;
@@ -33,9 +34,8 @@ class _AddCamionesState extends State<AddCamiones> {
   DateTime _now;
   DateTime _yesterday;
   String myUrl;
-  
-String id_variable="";
 
+  String id_variable = "";
 
   List<StateModel> stateList = [];
   List<LocalityModel> localityList = [];
@@ -64,12 +64,15 @@ String id_variable="";
 
     localityList = jsonResponse.map((i) => LocalityModel.fromJson(i)).toList();
   }
+
   String generateRandomString(int len) {
-  var r = Random();
-  const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  id_variable= List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
-  return id_variable;
-}
+    var r = Random();
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    id_variable =
+        List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+    return id_variable;
+  }
 
   @override
   void initState() {
@@ -78,6 +81,7 @@ String id_variable="";
 
     generateRandomString(10);
     _nameController = TextEditingController();
+    _numEconomicoController = TextEditingController();
     super.initState();
   }
 
@@ -87,8 +91,8 @@ String id_variable="";
     super.dispose();
 
     _nameController.dispose();
+    _numEconomicoController.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +143,7 @@ String id_variable="";
                         child: Container(
                             height: 42.0,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(15.0),
                               border: Border.all(
                                 color: Colors.white,
                               ),
@@ -147,7 +151,7 @@ String id_variable="";
                             child: Row(
                               children: <Widget>[
                                 SizedBox(
-                                  width: 30.0,
+                                  width: 10.0,
                                 ),
                                 Expanded(
                                   child: TextFormField(
@@ -174,6 +178,47 @@ String id_variable="";
                               ],
                             )),
                       ),
+                      SizedBox(height: 12.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                        child: Container(
+                            height: 42.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              border: Border.all(
+                                color: Colors.white,
+                              ),
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 15.0,
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    controller: _numEconomicoController,
+                                    textCapitalization:
+                                        TextCapitalization.words,
+                                    cursorColor:
+                                        MyColors.Colors.colorBackgroundDark,
+                                    //obscureText: true,
+                                    style: TextStyle(
+                                      fontFamily: 'Futura',
+                                      color: Colors.white,
+                                    ),
+                                    decoration: InputDecoration(
+                                        hintText: "Numero economico ",
+                                        border: InputBorder.none,
+                                        hintStyle: TextStyle(
+                                          fontFamily: 'Futura',
+                                          color: Colors.white54,
+                                        )),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                       SizedBox(height: 15.0),
                       Padding(
                         padding: const EdgeInsets.only(left: 40.0, right: 40.0),
@@ -188,7 +233,7 @@ String id_variable="";
                                 child: Container(
                                     height: 42.0,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                      borderRadius: BorderRadius.circular(15.0),
                                       border: Border.all(
                                         color: Colors.white,
                                       ),
@@ -221,7 +266,7 @@ String id_variable="";
                                 child: Container(
                                     height: 42.0,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                      borderRadius: BorderRadius.circular(15.0),
                                       border: Border.all(
                                         color: Colors.white,
                                       ),
@@ -240,7 +285,7 @@ String id_variable="";
                       ),
                       GestureDetector(
                         onTap: () {
-                           _procesoRegistro();
+                          _procesoRegistro();
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(
@@ -415,12 +460,16 @@ String id_variable="";
 
   _procesoRegistro() async {
     String _name = _nameController.text;
-    //String _lastName = _lastNameController.text;
+    String _numEconomico = _numEconomicoController.text;
 
     FocusScope.of(context).requestFocus(FocusNode());
 
     if (_name.length < 5) {
       Toast.show("Por favor, escriba su nombre correctamente", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      return;
+    }if (_numEconomico.length < 5) {
+      Toast.show("Por favor, escriba su Numero Economico", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     }
@@ -437,7 +486,7 @@ String id_variable="";
 
     var now = DateTime.now();
 
-      QuerysService().SaveCamiones(
+    QuerysService().SaveCamiones(
         idCenser: id_variable,
         errorFunction: _cancelSpinnerError,
         function: _cancelSpinnerSuccesful,
@@ -448,7 +497,8 @@ String id_variable="";
           'createdOn': now,
           'state': _state,
           'locality': _locality,
-          'createBy':widget.adminModel.nameDueno,
+          'createBy': widget.adminModel.nameDueno,
+          'numEconomico':_numEconomico,
         });
   }
 

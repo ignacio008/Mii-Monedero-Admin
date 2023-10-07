@@ -238,7 +238,7 @@ void _getPagoItems() async {
                 height: 5.0,
               ),
               Text(
-                "Mii Monedero Admin",
+                "Mii Monedero Cuentas",
                 style: TextStyle(
                     fontSize: 26.0,
                     fontWeight: FontWeight.bold

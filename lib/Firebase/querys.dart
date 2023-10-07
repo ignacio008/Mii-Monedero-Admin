@@ -183,6 +183,10 @@ class QuerysService{
   UpdateSuspendedTrueCenser({String idCenser, Function function}) async {
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_CENSERS).doc(idCenser).update({"suspended": false});
   }
+  UpdateSuspendedTrueUsers({String idCenser, Function function}) async {
+    return await _fireStore.collection(FirebaseReferencias.REFERENCE_USERS).doc(idCenser).update({"suspended": false});
+  }
+
   UpdateSuspendedTrueCenserTaquilla({String idCenser, Function function}) async {
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_ADMIN).doc(idCenser).update({"isSupended": false});
   }
@@ -314,6 +318,9 @@ void UpdateSaldoTaquillas({String idCenser,BuildContext context, Future function
 
   UpdateSuspendedFalseCamion({String idCenser, Function function}) async {
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_CENSERS).doc(idCenser).update({"suspended": true});
+  }
+   UpdateSuspendedFalseUsers({String idCenser, Function function}) async {
+    return await _fireStore.collection(FirebaseReferencias.REFERENCE_USERS).doc(idCenser).update({"suspended": true});
   }
   UpdateSuspendedFalseCamionTaquilla({String idCenser, Function function}) async {
     return await _fireStore.collection(FirebaseReferencias.REFERENCE_ADMIN).doc(idCenser).update({"isSupended": true});

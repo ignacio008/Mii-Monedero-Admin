@@ -66,7 +66,7 @@ class _CensersScreenState extends State<CensersScreen> {
       setSpinnerStatus(false);
     } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context,
+      Toast.show("No se han encontrado Chofer", context,
           duration: Toast.LENGTH_LONG);
     }
   }
@@ -79,7 +79,7 @@ class _CensersScreenState extends State<CensersScreen> {
       setSpinnerStatus(false);
     } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context,
+      Toast.show("No se han encontrado Chofer", context,
           duration: Toast.LENGTH_LONG);
     }
   }
@@ -93,7 +93,7 @@ class _CensersScreenState extends State<CensersScreen> {
       setSpinnerStatus(false);
     } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context,
+      Toast.show("No se han encontrado Chofer", context,
           duration: Toast.LENGTH_LONG);
     }
   }
@@ -105,7 +105,7 @@ class _CensersScreenState extends State<CensersScreen> {
       setSpinnerStatus(false);
     } else {
       setSpinnerStatus(false);
-      Toast.show("No se han encontrado censers", context,
+      Toast.show("No se han encontrado Chofer", context,
           duration: Toast.LENGTH_LONG);
     }
   }
@@ -209,7 +209,7 @@ class _CensersScreenState extends State<CensersScreen> {
               height: 10.0,
             ),
             Text(
-              "Mii Monedero Admin",
+              "Mii Monedero Cuentas",
               style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),

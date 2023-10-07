@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
               height: statusbarHeight + barHeight,
               child: Center(
                 child: Text(
-                  "MII MONEDERO ADMIN",
+                  "Mii Monedero Cuentas",
                   style: TextStyle(
                       fontSize: 20.0,
                       color: Colors.white,
@@ -120,7 +120,8 @@ class _MainScreenState extends State<MainScreen> {
             Expanded(
               flex: 1,
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.72,
+               constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.72 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -171,7 +172,7 @@ class _MainScreenState extends State<MainScreen> {
                                                         : MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.42,
+                                                            0.41,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -225,7 +226,7 @@ class _MainScreenState extends State<MainScreen> {
                                                           MediaQuery.of(context)
                                                                   .size
                                                                   .width *
-                                                              0.42,
+                                                              0.41,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
@@ -263,7 +264,10 @@ class _MainScreenState extends State<MainScreen> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.99,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.24,
+                                   widget.adminModel.typeAdmin !=
+                                                "superAdmin"
+                                            ? MediaQuery.of(context).size.height * 0
+                                            :  MediaQuery.of(context).size.height * 0.24,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -303,7 +307,7 @@ class _MainScreenState extends State<MainScreen> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.42,
+                                                            0.41,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -358,7 +362,7 @@ class _MainScreenState extends State<MainScreen> {
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.42,
+                                                      0.41,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -393,10 +397,7 @@ class _MainScreenState extends State<MainScreen> {
                               children: [
                                 Column(
                                   children: [
-                                   widget.adminModel.typeAdmin !=
-                                                "superAdmin"
-                                            ? Container()
-                                            : GestureDetector(
+                                   GestureDetector(
                                       onTap: () {
                                         Navigator.push(
                                             context,
@@ -439,10 +440,7 @@ class _MainScreenState extends State<MainScreen> {
                                         ),
                                       ),
                                     ),
-                               widget.adminModel.typeAdmin !=
-                                                "superAdmin"
-                                            ? Container()
-                                            :     Text(
+                               Text(
                                       "Camiones",
                                       style: TextStyle(
                                           fontSize: 16.0,
